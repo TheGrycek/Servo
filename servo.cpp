@@ -10,14 +10,14 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define C0 PB3  //cewka 0
-#define C1 PB0  //cewka 1
-#define C2 PB1  //cewka 2
-#define C3 PB2  //cewka 3
-#define nastawa PB4 //nastawa obrotów
+#define C0 PB3  //uzwojenie 0
+#define C1 PB0  //uzwojenie 1
+#define C2 PB1  //uzwojenie 2
+#define C3 PB2  //uzwojenie 3
+#define nastawa PB4 //nastawa obrotÃ³w
 
-#define t1 50   //czas za³¹czenia cewki
-#define t2 0   //czas miêdzy prze³¹czeniem cewek
+#define t1 50   //czas zaÅ‚Ä…czenia uzwojenia
+#define t2 0   //czas miÄ™dzy przeÅ‚Ä…czeniem uzwojeÅ„
 
 		int krok1()
 		{
@@ -115,16 +115,16 @@
 	|(1<<ADPS0)
 	|(1<<ADPS1)
 	|(1<<ADPS2); // Ustawienie preskalera na 128
-	ADMUX&=~ (REFS0) ; //ustawienie zewnêtrznego napiêcia odniesienia
-	ADMUX |=(1<<MUX1); //ustawienie PB4 jako wejœcie 
+	ADMUX&=~ (REFS0) ; //ustawienie zewnÄ™trznego napiÄ™cia odniesienia
+	ADMUX |=(1<<MUX1); //ustawienie PB4 jako wejÅ›cie 
 
-	DDRB  |= (1<<C0) | (1<<C1) | (1<<C2) | (1<<C3); //ustawienie jako wyjœcia
-	DDRB&=~(1<<DDB4); //ustawienie wejœcia
+	DDRB  |= (1<<C0) | (1<<C1) | (1<<C2) | (1<<C3); //ustawienie jako wyjÅ›cia
+	DDRB&=~(1<<DDB4); //ustawienie wejÅ›cia
 
-	ADCSRA|=(1<<ADSC); //wywo³anie dokonania pomiaru
-	while(ADCSRA & (1<<ADSC)); //odczekanie a¿ bit ADSC zmieni siê na zero
+	ADCSRA|=(1<<ADSC); //wywoÅ‚anie dokonania pomiaru
+	while(ADCSRA & (1<<ADSC)); //odczekanie aÅ¼ bit ADSC zmieni siÄ™ na zero
 	
-	int polozenie=ADC/85; //dzielenie przez 85, ¿eby uzyskaæ wartoœæ od 0 do 12
+	int polozenie=ADC/85; //dzielenie przez 85, Å¼eby uzyskaÄ‡ wartoÅ›Ä‡ od 0 do 12
 	
 	for(int i=1;i<=polozenie;i++)
 	prawo();
